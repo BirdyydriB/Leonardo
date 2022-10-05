@@ -7,6 +7,9 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Mapping\ClassMetadata;
 
 #[ORM\Entity(repositoryClass: IngredientRepository::class)]
 class Ingredient
@@ -32,6 +35,16 @@ class Ingredient
     public function __construct()
     {
         $this->pizzas = new ArrayCollection();
+    }
+
+    public static function loadValidatorMetadata(ClassMetadata $metadata)
+    {
+        $metadata->addPropertyConstraint('name', new Assert\NotBlank());
+        $metadata->addPropertyConstraint('name', new Assert\Length(['min' => 3, 'max' => 255]));
+        $metadata->addConstraint(new UniqueEntity(['fields' => 'name']));
+
+        $metadata->addPropertyConstraint('price', new Assert\NotBlank());
+        $metadata->addPropertyConstraint('price', new Assert\Positive());
     }
 
     public function getId(): ?int
