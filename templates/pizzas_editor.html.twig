@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="container">
+  <h1>Mes Pizzas</h1>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Nom</th>
+        <th>Prix</th>
+        <th>Ingrédients</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for pizza in pizzas %}
+        <tr>
+          <td>{{ pizza.name }}</td>
+          <td>{{ pizza.price }}</td>
+          <td>
+            {% for pizzaIngredient in pizza.ingredients %}
+              <button type="button" class="btn btn-success m-1" data-toggle="popover" data-content="prix : {{ pizzaIngredient.price }}">
+                {{ pizzaIngredient.name }}
+              </button>
+            {% endfor %}
+
+
+            {% for ingredient in ingredients %}
+              {% if ingredient not in pizza.ingredients %}
+                <button type="button" class="btn btn-secondary m-1">
+                  {{ ingredient.name }}
+                </button>
+              {% endif %}
+            {% endfor %}
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

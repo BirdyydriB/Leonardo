@@ -23,6 +23,20 @@ class PizzaController extends AbstractController
     }
 
 
+    #[Route('/')]
+    public function home(): Response
+    {
+        $pizzas = $this->doctrine->getRepository(Pizza::class)
+            ->findAll();
+        $ingredients = $this->doctrine->getRepository(Ingredient::class)
+            ->findAll();
+
+        return $this->render('pizzas_editor.html.twig', [
+          'pizzas' => $pizzas,
+          'ingredients' => $ingredients
+        ]);
+    }
+
     #[Route('/pizzas')]
     public function list(): Response
     {
