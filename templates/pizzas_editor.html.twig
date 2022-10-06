@@ -14,20 +14,19 @@
     </thead>
     <tbody>
       {% for pizza in pizzas %}
-        <tr>
+        <tr value={{ pizza.id }}>
           <td>{{ pizza.name }}</td>
-          <td>{{ pizza.price }}</td>
+          <td class="pizzaPrice">{{ pizza.price }}</td>
           <td>
             {% for pizzaIngredient in pizza.ingredients %}
-              <button type="button" class="btn btn-success m-1" data-toggle="popover" data-content="prix : {{ pizzaIngredient.price }}">
+              <button class="btn btn-success m-1 ingredient" value={{ pizzaIngredient.id }} data-bs-toggle="tooltip" data-bs-title="Prix : {{ pizzaIngredient.price }}">
                 {{ pizzaIngredient.name }}
               </button>
             {% endfor %}
 
-
             {% for ingredient in ingredients %}
               {% if ingredient not in pizza.ingredients %}
-                <button type="button" class="btn btn-secondary m-1">
+                <button class="btn btn-secondary m-1 ingredient" value={{ ingredient.id }} data-bs-toggle="tooltip" data-bs-title="Prix : {{ ingredient.price }}">
                   {{ ingredient.name }}
                 </button>
               {% endif %}
