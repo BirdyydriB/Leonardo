@@ -1,5 +1,4 @@
 # Leonardo
-A pizza generator :
 Make new pizza recipes.
 Choose your ingredients, and the total price of your pizza is automatically calculated.
 
@@ -11,8 +10,8 @@ cd <this repo>/
 composer install
 ```
 
-Create a env.local file with DATABASE_URL=<the connection parameters to your database>
-See .env file for more informations
+Create a env.local file with DATABASE_URL=[the connection parameters to your database]
+(See .env file for more informations)
 
 If needed, you can create a database with :
 ```
@@ -41,4 +40,4 @@ http://127.0.0.1:8000/
 
 
 # TODO
-develop other twig pages for editing and adding new ingredients and pizza
+develop other pages for editing and adding new ingredients and pizza
